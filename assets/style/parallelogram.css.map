@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,qBAAsB;EACpB,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,GAAG;EACrB,SAAS,EAAE,WAAW;EACtB,UAAU,EAAE,OAAO",
+"sources": ["parallelogram.scss"],
+"names": [],
+"file": "parallelogram.css"
+}

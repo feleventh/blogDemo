@@ -1,0 +1,67 @@
+// authored by zhang chi  blog  http://feleventh.github.io
+// tag normalize
+
+//color
+$color-bg: rgb(244,244,244);
+$blue: rgb(2,124,223);
+$panel-red: rgb(255,66,66);
+$panel-yellow: rgb(255,172,19);
+$panel-green: rgb(131,196,78);
+$panel-olive: rgb(0,192,165);
+$cell-border: 1px solid rgb(238,238,238);
+$color-border: rgb(230,230,230);
+$c-f-n: #666;
+$c-f-b: #333;
+
+html {
+  margin: 0;
+  padding: 0;
+}
+body{
+  margin: 0;
+  padding: 0;
+  color: $c-f-n;
+  position: relative;
+}
+
+
+// common style
+.main-wrap {
+  margin: 0 auto;
+  width: 640px;
+  padding: 20px 0;
+  background: #eee;
+  font-size: 14px;
+  line-height: 20px;
+}
+.header{
+  font-size: 24px;
+  line-height: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.card{
+  width: 600px;
+  margin: 0 20px;
+  background: #fff;
+  .card-header{
+    font-size: 20px;
+    color: $c-f-b;
+    padding: 0 20px;
+    line-height: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-bottom: 1px solid $color-border;
+  }
+  .card-content{
+    padding: 20px;
+  }
+}
+
+.parallelogram-simple{
+  width: 200px;
+  height: 100px;
+  transform-origin: 0 0;
+  transform: skew(30deg);
+  background: $panel-olive;
+}

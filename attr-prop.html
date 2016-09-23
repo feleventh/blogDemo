@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>attr-prop</title>
+</head>
+<body>
+  <h2>jQuery attr与prop的区别</h2>
+  <ul>
+    <li><input type="checkbox" class="input-test">apple</li>
+    <li><input type="checkbox" class="input-test">orange</li>
+    <li><input type="checkbox" class="input-test">banana</li>
+  </ul>
+  <input type="checkbox" class="input-all" data-type='fruit' datadefine='nothing'> all
+  <br>
+  <select name="area" id="area">
+    <option value="beijing">beijing</option>
+    <option value="shanghai">shanghai</option>
+  </select>
+  <p><span>attr-prop</span></p>
+  <img src="./assets/images/no-img.svg" alt="fail load img" width="200px" height="80px">
+  <p>
+    <label><input type="radio" name="gender" value="1" checked="">boy</label>
+    <label><input type="radio" name="gender" value="2">girl</label>
+  </p>
+</body>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+$().ready(function(){
+  $('.input-all').change(function(event){
+    event.stopPropagation();
+    console.log('attr:'+$('.input-all').attr('checked'));
+    console.log('prop:'+$('.input-all').prop('checked'));
+    if($('.input-all').prop('checked')){
+      $('.input-test').prop('checked',true);
+    }else{
+      $('.input-test').prop('checked',false);
+    }
+  })
+  console.log($('#area').val());
+  $('#area').val('guangzhou');
+  console.log($('#area').val());
+  console.log($('.input-all').prop('data-type'));
+  console.log($('.input-all').attr('data-type'));
+  console.log($('.input-all').datadefine);
+  console.log($('img').prop('src'));
+  console.log($('img').attr('src'));
+  $('.radio-input input#xx').change(function(event){
+    if($(this).prop('checked')){
+      $('#other').prop('disabled','false');
+    }
+  })
+})
+  
+</script>
+</html>
