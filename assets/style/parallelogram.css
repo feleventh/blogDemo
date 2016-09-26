@@ -5,6 +5,22 @@
   transform: skew(30deg);
   background: #00c0a5; }
 
+.parallelogram-more {
+  width: 120px;
+  height: 200px;
+  transform-origin: 0 0;
+  transform: skew(30deg);
+  background: #00c0a5;
+  position: relative;
+  overflow: hidden; }
+  .parallelogram-more > * {
+    transform-origin: 0 0;
+    transform: skew(-30deg);
+    position: relative; }
+  .parallelogram-more p {
+    width: 80px;
+    left: 30px; }
+
 .parallelogram-page::after {
   display: block;
   content: '';
