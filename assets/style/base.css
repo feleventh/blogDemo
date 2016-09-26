@@ -24,7 +24,7 @@ body {
 
 .card {
   width: 600px;
-  margin: 0 20px 20px;
+  margin: 0 20px;
   background: #fff; }
   .card .card-header {
     font-size: 20px;
@@ -37,11 +37,6 @@ body {
   .card .card-content {
     padding: 20px; }
 
-.parallelogram-simple {
-  width: 200px;
-  height: 100px;
-  transform-origin: 0 0;
-  transform: skew(30deg);
-  background: #00c0a5; }
+
 
 /*# sourceMappingURL=base.css.map */
