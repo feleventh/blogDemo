@@ -1,70 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>form validate</title>
+  <link rel="stylesheet" href="assets/style/base.css">
+  <link rel="stylesheet" href="assets/style/form-validate.css">
+    <style>
+
+    </style>
 </head>
 <body>
-    <label for="name">姓名</label><input type="text" class='name' name='name'>
-    <button class="submit">提交</button>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script>
-        $.validate={
-  tips:function(ele,tipText,nofocus){
-          var topDoc,topEle;
-          return ele.append("<span>"+tipText+"<span>"),!nofocus&&ele.focus(),topDoc=$(window).scrollTop(),topEle=ele.offset().top-topDoc,50>topEle&&$(window).scrollTop(topDoc-50+topEle),false
-        },
-  rules:{
-    required:function(ele,tipText,value){return""==value?(ele.val(""),$.validate.tips(ele,tipText)):true},
-    length:function(ele,ruleMsg,value){return value.length<b.rule[0]||value.length>b.rule[1]?$.validate.tips(ele,b.msg):true},
-    isNumber:function(ele,tipText,value){return new RegExp("^(13|15|18|14|17)[0-9]{9}$"),isNaN(value)?$.validate.tips(ele,tipText):true},
-    isMobile:function(ele,tipText,value){var d=new RegExp("^(13|15|18|14|17)[0-9]{9}$");return d.test(value)?!0:$.validate.tips(ele,tipText)},
-    isPhone:function(ele,tipText,value){var d=new RegExp("^([0-9]{3,4}-)?[0-9]{7,8}$");return d.test(value)?!0:$.validate.tips(ele,tipText)},
-    isEmail:function(ele,tipText,value){var d=new RegExp("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$");return d.test(value)?true:$.validate.tips(ele,tipText)},
-    isCname : function(ele,tipText,value){var d=new RegExp("^[\u4E00-\u9FA5]{2,9}$");return d.test(value)?true:$.validate.tips(ele,tipText)},
-    isIdNum : function(ele,tipText,value){var d=new RegExp("^([0-9]{17}|[0-9]{18})$");return d.test(value)?true:$.validate.tips(ele,tipText)},
-    isBankNum : function(ele,tipText,value){var d=new RegExp("^([0-9]{16}|[0-9]{19})$");return d.test(value)?true:$.validate.tips(ele,tipText)}
-  },
-  check:function(arrayVali){/*a为验证数组，[{el: el1, rule1: tipText,},{el: el2, rule1: tipText,}]*/
-            var b=this,c=true;
-            return $.each(arrayVali,function(index,ele){ /*ele: {el: el1, ruglar1: tipText,}*/
-                  var h,i,rule,fn,arrayRule=[],required=false,value=$.trim(ele.el.val());
-                  for(h in ele){
-                    if(h != "el"){
-                      arrayRule.push(h);
-                    }
-                    if(h =='required'){
-                      required = true;
-                    }
-                  }
+<div class="main-wrap">
+  <div class="header">form validate</div>
+  <div class="card">
+    <div class="card-header">请填写个人信息</div>
+    <div class="card-content">
+      <div class="form">
+        <p><label for="name">姓名:</label><input type="text" id='name' name='name' placeholder="请填写中文姓名"></p>
+        <p><label for="identity">身份证号:</label><input type="text" id='identity' name='identity' placeholder="请填写身份证号"></p>
+        <p><label for="password">密码:</label><input type="password" id='password' name='password' placeholder="请设置密码"></p>
+        <p><button class="submit">提交</button></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+  $.extend({
+    formTips:function(ele,tipText,nofocus){
+      var topDoc,topEle;
+      ele.after("<span class='tips'>"+tipText+"</span>");
+      var topSize = ele.offset().top;
+      var leftSize = ele.offset().left;
+      $('.tips').css({
+        top: topSize-35,
+        left: leftSize+5
+      })
+      setTimeout("$('.tips').remove()",2000);
+      return !nofocus&&ele.focus(),topDoc=$(window).scrollTop(),topEle=ele.offset().top-topDoc,50>topEle&&$(window).scrollTop(topDoc-50+topEle),false
+    },
+    rules:{
+      required:function(ele,tipText,value){return""==value?(ele.val(""),$.formTips(ele,tipText)):true},
+      length:function(ele,ruleMsg,value){return value.length<ruleMsg.rule[0]||value.length>ruleMsg.rule[1]?$.formTips(ele,ruleMsg.msg):true},
+      isCname : function(ele,tipText,value){var d=new RegExp("^[\u4E00-\u9FA5]{2,9}$");return d.test(value)?true:$.formTips(ele,tipText)},
+      isIdNum : function(ele,tipText,value){var d=new RegExp("^([0-9]{17}|[0-9]{18})$");return d.test(value)?true:$.formTips(ele,tipText)},
+      isMobile:function(ele,tipText,value){var d=new RegExp("^(13|15|18|14|17)[0-9]{9}$");return d.test(value)?!0:$.formTips(ele,tipText)},
+      isPhone:function(ele,tipText,value){var d=new RegExp("^([0-9]{3,4}-)?[0-9]{7,8}$");return d.test(value)?!0:$.formTips(ele,tipText)},
+      isEmail:function(ele,tipText,value){var d=new RegExp("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$");return d.test(value)?true:$.formTips(ele,tipText)},
+      isBankNum : function(ele,tipText,value){var d=new RegExp("^([0-9]{16}|[0-9]{19})$");return d.test(value)?true:$.formTips(ele,tipText)},
+    },
+    formValidate:function(arrayVali){/!*a为验证数组，[{el: el1, rule1: tipText,},{el: el2, rule1: tipText,}]*!/
+      var b=this,c=true;
+      return $.each(arrayVali,function(index,ele){ /!*ele: {el: el1, ruglar1: tipText,}*!/
+        var h,i,rule,fn,arrayRule=[],required=false,value=$.trim(ele.el.val());
+        for(h in ele){
+          if(h != "el"){
+            arrayRule.push(h);
+          }
+          if(h =='required'){
+            required = true;
+          }
+        }
 
-                  if(!required&&value==""){
-                    return false;
-                  }
+        if(!required&&value==""){
+          return false;
+        }
 
-                  for(i=0; i<arrayRule.length;i++){
-                    if(rule = arrayRule[i],rule in b.rules&&(fn=b.rules[rule])(ele.el,ele[rule],value),!fn){
-                      return c=false, false;
-                    }
-                  }
-                }), 
-                c;
-  }    
-}
-
-    var name = $('.name');
-
-    $().ready(function(){
-        console.log($.validate);
-        $('.submit').click(function(){
-            var v = $.validate.check([{el:name,require:"请输入姓名！",isCname:"姓名必须为中文汉字！"}]);
-            if (!validate) {
-                return false;
+        for(i=0; i<arrayRule.length;i++){
+          if(arrayRule[i] in b.rules){
+            rule = arrayRule[i];
+            fn=b.rules[rule](ele.el,ele[rule],value)
+            if(!fn){
+              return c=false, false;
             }
-        })
-    })
-    
-    
+          }
+        }
+      }), c;
+    }
+  });
+
+  $().ready(function(){
+    $('.submit').click(function(){
+      var name = $('input#name');
+      var identity = $('#identity');
+      var password = $('#password');
+      var v = $.formValidate([
+        {el:name,required:"请输入姓名！",isCname:"姓名必须为中文汉字！"},
+        {el:identity,required:"请输入身份证号！",isIdNum:"请输入正确的身份证号！"},
+        {el:password,required:"请输入密码！",length:{rule:[6,12],msg:"密码长度必须为6到12位"}},
+      ]);
+      if (!v) {
+        return false;
+      }
+      //ajax
+      $.formTips($(this),'填写正确，已提交！');
+    });
+  });
     </script>
 </body>
 </html>

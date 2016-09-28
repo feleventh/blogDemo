@@ -1,0 +1,47 @@
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+.tips {
+  position: absolute;
+  color: red;
+  animation: bounceIn .5s;
+  z-index: 2;
+  padding: 5px;
+  border-radius: 4px;
+  background: #ccc; }
+
+.tips::before {
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 20px;
+  border-top: 5px solid #ccc;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  z-index: 3; }
+
+.form p {
+  margin: 10px 0; }
+.form label {
+  margin-right: 5px;
+  width: 64px;
+  display: inline-block;
+  text-align: right; }
+.form input {
+  padding: 0 5px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px; }
+.form button {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0 100px; }
+
+/*# sourceMappingURL=form-validate.css.map */

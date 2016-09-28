@@ -37,7 +37,7 @@
 .parallelogram-page div {
   float: left; }
 .parallelogram-page .middle-page {
-  width: 40px;
+  width: 32px;
   transform-origin: 0 0;
   transform: skew(30deg);
   position: relative; }
@@ -48,7 +48,7 @@
     position: relative;
     left: 22px; }
 .parallelogram-page .first-page {
-  width: 30px;
+  width: 20px;
   position: relative;
   margin-right: 12px; }
   .parallelogram-page .first-page span {

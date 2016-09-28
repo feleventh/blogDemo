@@ -6,11 +6,12 @@ body {
   margin: 0;
   padding: 0;
   color: #666;
-  position: relative; }
+  position: relative;
+  font-family: 'microsoft yahei'; }
 
 .main-wrap {
   margin: 0 auto;
-  width: 640px;
+  max-width: 640px;
   padding: 20px 0;
   background: #eee;
   font-size: 14px;
@@ -23,9 +24,10 @@ body {
   margin-bottom: 20px; }
 
 .card {
-  width: 600px;
+  max-width: 600px;
   margin: 0 20px 20px;
-  background: #fff; }
+  background: #fff;
+  box-shadow: 0 10px 6px -6px #aaa; }
   .card .card-header {
     font-size: 20px;
     color: #333;
@@ -35,7 +37,7 @@ body {
     overflow: hidden;
     border-bottom: 1px solid #e6e6e6; }
   .card .card-content {
-    padding: 20px; }
+    padding: 10px; }
 
 .parallelogram-simple {
   width: 200px;
