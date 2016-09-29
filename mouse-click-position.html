@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>form validate</title>
+  <link rel="stylesheet" href="assets/style/base.css">
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    function click1 (event){
+      var data1 = mouseCoords(event);
+      var x1 = data1.x;
+      var y1 = data1.y;
+      alert("绝对坐标："+x1+","+y1);
+      var data2 = getXAndY(event);
+      var x2 = data2.x;
+      var y2 = data2.y;
+      alert("相对坐标："+x2+","+y2);
+    }
+
+    //获取鼠标点击区域中的相对位置坐标
+    function getXAndY(event){
+      //鼠标点击的绝对位置
+      Ev= event || window.event;
+      var mousePos = mouseCoords(event);
+      var x = mousePos.x;
+      var y = mousePos.y;
+      //alert("鼠标点击的绝对位置坐标："+x+","+y);
+
+      //获取div在body中的绝对位置
+      var x1 = $("#test").offset().left;
+      var y1 = $("#test").offset().top;
+      //alert("div在body中的绝对位置坐标："+x1+","+y1);
+
+      //鼠标点击位置相对于div的坐标
+      var x2 = x - x1;
+      var y2 = y - y1;
+      return {x:x2,y:y2};
+    }
+
+    //获取鼠标点击区域在Html绝对位置坐标
+    function mouseCoords(event){
+      if(event.pageX || event.pageY){
+        return {x:event.pageX, y:event.pageY};
+      }
+      return{
+        x:event.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:event.clientY + document.body.scrollTop - document.body.clientTop
+      };
+    }
+  </script>
+</head>
+<body>
+<div class="main-wrap">
+  <div class="header">form validate</div>
+  <div class="card">
+    <div id="test" style="width:200px; height:200px; border:1px solid #d3d3d3;" onclick="click1(event)"></div>
+  </div>
+</div>
+</body>
+</html>

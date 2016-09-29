@@ -6,9 +6,6 @@
   <title>form validate</title>
   <link rel="stylesheet" href="assets/style/base.css">
   <link rel="stylesheet" href="assets/style/form-validate.css">
-    <style>
-
-    </style>
 </head>
 <body>
 <div class="main-wrap">
@@ -40,7 +37,7 @@
       setTimeout("$('.tips').remove()",2000);
       return !nofocus&&ele.focus(),topDoc=$(window).scrollTop(),topEle=ele.offset().top-topDoc,50>topEle&&$(window).scrollTop(topDoc-50+topEle),false
     },
-    rules:{
+    formRules:{
       required:function(ele,tipText,value){return""==value?(ele.val(""),$.formTips(ele,tipText)):true},
       length:function(ele,ruleMsg,value){return value.length<ruleMsg.rule[0]||value.length>ruleMsg.rule[1]?$.formTips(ele,ruleMsg.msg):true},
       isCname : function(ele,tipText,value){var d=new RegExp("^[\u4E00-\u9FA5]{2,9}$");return d.test(value)?true:$.formTips(ele,tipText)},
@@ -68,9 +65,9 @@
         }
 
         for(i=0; i<arrayRule.length;i++){
-          if(arrayRule[i] in b.rules){
+          if(arrayRule[i] in b.formRules){
             rule = arrayRule[i];
-            fn=b.rules[rule](ele.el,ele[rule],value)
+            fn=b.formRules[rule](ele.el,ele[rule],value)
             if(!fn){
               return c=false, false;
             }
