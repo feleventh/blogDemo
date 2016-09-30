@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>css3 parallelogram</title>
+  <link rel="stylesheet" href="assets/style/base.css">
+  <link rel="stylesheet" href="assets/style/triangle.css">
+</head>
+<body>
+<div class="main-wrap">
+  <div class="header">css3 parallelogram</div>
+  <div class="card">
+    <div class="card-header">bootstrap caret类的几种变形</div>
+    <div class="card-content">
+      <div class="caret-1"></div>
+      <div class="caret-2"></div>
+      <div class="caret-3"></div>
+      <div class="caret-4"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">制作任意角度三角形</div>
+    <div class="card-content">
+      <p>滑动滑动条调节三角形左侧边的两个夹角</p>
+      <p class="border-top"><input type="range" max="89" min="1" step="0.1"><span></span><i>度</i></p>
+      <p class="border-bottom"><input type="range" max="89" min="1" step="0.1"><span></span><i>度</i></p>
+      <div class="triangle"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">css三角形的几种应用</div>
+    <div class="card-content">
+      <div class="example">
+        <h3>指向框的只是箭头</h3>
+        <div class="dialog-box-1">我像微信对话框吗？</div>
+        <div class="dialog-box-2">不知道！哈哈！</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+  $('p').each(function(){
+    $(this).find("span").text($(this).find('input').val());
+  })
+  $('.border-top input').change(function(){
+    var angle = $(this).val();
+    $(this).siblings('span').text(angle);
+    console.log(Math.tan(angle/180*Math.PI));
+    $('.triangle').css({
+      borderTopWidth: 50/Math.tan(angle/180*Math.PI)
+    })
+  })
+  $('.border-bottom input').change(function(){
+    var angle = $(this).val();
+    $(this).siblings('span').text(angle);
+    console.log(Math.tan(angle/180*Math.PI));
+    $('.triangle').css({
+      borderBottomWidth: 50/Math.tan(angle/180*Math.PI)
+    })
+  })
+</script>
+</body>
+</html>

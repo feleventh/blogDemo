@@ -1,0 +1,78 @@
+.triangle{
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 20px;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-left: 50px solid green;
+}
+.caret-1 {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin-left: 20px;
+  vertical-align: middle;
+  border-top: 4px solid red;
+  border-right: 4px solid green;
+  border-left: 4px solid blue;
+}
+.caret-2 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
+  vertical-align: middle;
+  border-top: 20px solid red;
+  border-right: 20px solid green;
+  border-left: 20px solid blue;
+}
+.caret-3 {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 20px;
+  vertical-align: middle;
+  border-top: 30px solid red;
+  border-right: 30px solid green;
+  border-left: 30px solid blue;
+}
+.caret-4 {
+  display: inline-block;
+  width: 0px;
+  height: 0px;
+  margin-left: 20px;
+  vertical-align: middle;
+  border-top: 40px solid red;
+  border-right: 40px solid green;
+  border-left: 40px solid blue;
+}
+.example{
+  margin-bottom: 20px;
+  border-bottom: 2px dashed #ccc;
+  padding-bottom: 20px;
+  &::after{
+    content: '';
+    clear: both;
+    display: block;
+  }
+}
+.dialog-box-1{
+  background-color: lighten(green,10%);
+  padding: 8px;
+  border-radius: 5px;
+  position: relative;
+  float: left;
+  margin-left: 20px;
+  color: #fff;
+  &::after{
+    display: block;
+    position: absolute;
+    content: '';
+    top: 9px;
+    left: -10px;
+    border-top: 10px solid transparent;
+    border-right: 18px solid lighten(green,10%);
+    border-bottom: 10px solid transparent;
+  }
+}
