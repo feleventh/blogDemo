@@ -72,7 +72,7 @@ ul {
     width: 26px;
     height: 40px;
     background: rgba(51, 51, 51, 0.5); }
-    .turn a:hover::before {
+    .turn a:hover::before, .turn a:hover::after {
       background-color: #fff; }
   .turn .prev {
     margin-left: 10px; }
