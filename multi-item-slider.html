@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>multi-item-slider</title>
+  <link rel="stylesheet" href="assets/style/base.css">
+  <link rel="stylesheet" href="assets/style/multi-item-slider.css">
+<body>
+<div class="main-wrap">
+  <div class="header">多内容项轮播</div>
+  <div class="card">
+    <div class="card-header">多内容项向上自动轮播</div>
+    <div class="card-content up-slider">
+      <ul>
+        <li><a href="javascript:;"><span class="index">1</span><span class="name">张三</span><span class="address">广州市天河区体育东路122号</span></a></li>
+        <li><a href="javascript:;"><span class="index">2</span><span class="name">张而</span><span class="address">广州市天河区建工路123号</span></a></li>
+        <li><a href="javascript:;"><span class="index">3</span><span class="name">张无</span><span class="address">广州市天河区中山路124号</span></a></li>
+        <li><a href="javascript:;"><span class="index">4</span><span class="name">张期</span><span class="address">广州市天河区解放路125号</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">多内容项向左同时手动轮播</div>
+    <div class="card-content up-slider">
+      <ul>
+        <li><a href="javascript:;"><div class="content">1</div></a></li>
+        <li><a href="javascript:;"><div class="content">2</div></a></li>
+        <li><a href="javascript:;"><div class="content">3</div></a></li>
+        <li><a href="javascript:;"><div class="content">4</div></a></li>
+        <li><a href="javascript:;"><div class="content">5</div></a></li>
+        <li><a href="javascript:;"><div class="content">6</div></a></li>
+      </ul>
+      <div class="turn">
+        <a href="javascript:;" class="prev"></a>
+        <a href="javascript:;" class="next"></a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+  $.fn.extend({
+    scrollUp: function(o) {
+      o = $.extend({
+        delayTime: 2000,
+        interTime: 1000,
+        size: 5
+      }, o);
+      var el = $(this);
+      if (el.children().length <= o.size) {
+        return false;
+      }
+      var h = el.children().eq(0).height();
+
+      function play() {
+        var a = el.children().eq(0);
+        a.animate({
+          "margin-top": -h
+        }, o.interTime, function() {
+          a.css("margin-top", 0).appendTo(el);
+        });
+      }
+      var timer = setInterval(play, o.delayTime);
+
+      el.hover(function() {
+        clearInterval(timer);
+      }, function() {
+        timer = setInterval(play, o.delayTime);
+      });
+    },
+    scrollLeft: function(o) {
+      o = $.extend({
+        interTime: 1500,
+        size: 4
+      }, o);
+      var el = $(this);
+      if (el.children().length <= o.size) {
+        return false;
+      }
+      var w = el.children().eq(0).width();
+      var len = el.children().length;
+      var size = len>=8?4:(len-4)%4;
+      el.css({
+        width: w*len+w*15,
+      })
+
+      var prev = el.parent().siblings('.pn').find('.prev');
+      var next = el.parent().siblings('.pn').find('.next');
+      if(len<5){
+        return el.parent().siblings('.pn').remove();
+      }
+      el.parent().siblings('.pn').append('<div class="mask hide"></div>');
+      var mask = el.parent().siblings('.pn').find('.mask');
+      next.click(function (event) {
+        event.stopPropagation();
+        mask.removeClass('hide');
+        el.prepend('<div class="next-wrap clearfix"></div>');
+        var nextWrap= el.find('.next-wrap');
+        el.children().each(function(index){
+          if(index<=size){
+            $(this).appendTo(nextWrap);
+          }
+        });
+        nextWrap.animate({"margin-left":-w*size-15*size},o.interTime,function(){
+          nextWrap.children().each(function(){
+            $(this).appendTo(el);
+            mask.addClass('hide');
+          });
+          nextWrap.remove();
+        });
+      });
+      prev.click(function(event){
+        event.stopPropagation();
+        mask.removeClass('hide');
+        el.css({left: -w*size-15*size,width: w*el.children().length+w*15+956});
+        el.children().each(function(index){
+          if(index >= len-size){
+            $(this).prependTo(el);
+          }
+        });
+        el.animate({left:0},o.interTime,function(){
+          mask.addClass('hide');
+        });
+      })
+    }
+  });
+</script>
+</body>
+</html>
