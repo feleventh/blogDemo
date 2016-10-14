@@ -22,18 +22,22 @@
   </div>
   <div class="card">
     <div class="card-header">多内容项向左同时手动轮播</div>
-    <div class="card-content up-slider">
-      <ul>
-        <li><a href="javascript:;"><div class="content">1</div></a></li>
-        <li><a href="javascript:;"><div class="content">2</div></a></li>
-        <li><a href="javascript:;"><div class="content">3</div></a></li>
-        <li><a href="javascript:;"><div class="content">4</div></a></li>
-        <li><a href="javascript:;"><div class="content">5</div></a></li>
-        <li><a href="javascript:;"><div class="content">6</div></a></li>
-      </ul>
-      <div class="turn">
-        <a href="javascript:;" class="prev"></a>
-        <a href="javascript:;" class="next"></a>
+    <div class="card-content left-slider">
+      <div class="panel">
+        <ul>
+          <li><a href="javascript:;"><div class="content">1</div></a></li>
+          <li><a href="javascript:;"><div class="content">2</div></a></li>
+          <li><a href="javascript:;"><div class="content">3</div></a></li>
+          <li><a href="javascript:;"><div class="content">4</div></a></li>
+          <li><a href="javascript:;"><div class="content">5</div></a></li>
+          <li><a href="javascript:;"><div class="content">6</div></a></li>
+          <li><a href="javascript:;"><div class="content">7</div></a></li>
+          <li><a href="javascript:;"><div class="content">8</div></a></li>
+        </ul>
+        <div class="turn">
+          <a href="javascript:;" class="prev"></a>
+          <a href="javascript:;" class="next"></a>
+        </div>
       </div>
     </div>
   </div>
@@ -85,13 +89,13 @@
         width: w*len+w*15,
       })
 
-      var prev = el.parent().siblings('.pn').find('.prev');
-      var next = el.parent().siblings('.pn').find('.next');
+      var prev = el.siblings('.turn').find('.prev');
+      var next = el.siblings('.turn').find('.next');
       if(len<5){
-        return el.parent().siblings('.pn').remove();
+        return el.siblings('.turn').remove();
       }
-      el.parent().siblings('.pn').append('<div class="mask hide"></div>');
-      var mask = el.parent().siblings('.pn').find('.mask');
+      el.siblings('.turn').append('<div class="mask hide"></div>');
+      var mask = el.parent().siblings('.turn').find('.mask');
       next.click(function (event) {
         event.stopPropagation();
         mask.removeClass('hide');
@@ -102,7 +106,7 @@
             $(this).appendTo(nextWrap);
           }
         });
-        nextWrap.animate({"margin-left":-w*size-15*size},o.interTime,function(){
+        nextWrap.animate({"margin-left":-w*size},o.interTime,function(){
           nextWrap.children().each(function(){
             $(this).appendTo(el);
             mask.addClass('hide');
@@ -113,7 +117,7 @@
       prev.click(function(event){
         event.stopPropagation();
         mask.removeClass('hide');
-        el.css({left: -w*size-15*size,width: w*el.children().length+w*15+956});
+        el.css({left: -w*size,width: w*el.children().length+w*size});
         el.children().each(function(index){
           if(index >= len-size){
             $(this).prependTo(el);
@@ -124,6 +128,10 @@
         });
       })
     }
+  });
+  $().ready(function(){
+    $('.up-slider ul').scrollUp({size: 3});
+    $('.left-slider ul').scrollLeft({size:4});
   });
 </script>
 </body>

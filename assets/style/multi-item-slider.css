@@ -1,3 +1,125 @@
+.up-slider ul {
+  overflow: hidden;
+  height: 70px; }
+  .up-slider ul span {
+    display: inline-block;
+    overflow: hidden; }
+  .up-slider ul .index {
+    width: 10%;
+    text-align: center; }
+  .up-slider ul .name {
+    width: 20%;
+    padding-left: 10px; }
+  .up-slider ul .address {
+    width: 65%;
+    padding-left: 10px; }
 
+.left-slider .panel {
+  width: 320px;
+  border: 5px solid #999;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden; }
+  .left-slider .panel ul {
+    overflow: hidden;
+    height: 100px;
+    position: relative; }
+    .left-slider .panel ul li {
+      float: left;
+      width: 80px;
+      height: 100px; }
+      .left-slider .panel ul li div {
+        line-height: 100px;
+        text-align: center;
+        color: #fff;
+        font-size: 24px; }
+    .left-slider .panel ul li:nth-child(1) {
+      background: #141ecd; }
+    .left-slider .panel ul li:nth-child(2) {
+      background: #503c9b; }
+    .left-slider .panel ul li:nth-child(3) {
+      background: #b45a69; }
+    .left-slider .panel ul li:nth-child(4) {
+      background: #ff7837; }
+    .left-slider .panel ul li:nth-child(5) {
+      background: #ff9605; }
+    .left-slider .panel ul li:nth-child(6) {
+      background: #ffb400; }
+    .left-slider .panel ul li:nth-child(7) {
+      background: #ffd200; }
+    .left-slider .panel ul li:nth-child(8) {
+      background: #fff000; }
+
+.turn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 1; }
+  .turn a {
+    display: block;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 26px;
+    height: 40px;
+    background: rgba(51, 51, 51, 0.5); }
+    .turn a:hover::before, .turn a:hover::after {
+      background-color: #fff; }
+  .turn .prev {
+    margin-left: -2px; }
+    .turn .prev::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 15px;
+      background: #ccc;
+      top: 5px;
+      left: 5px;
+      transform-origin: 50% 100%;
+      transform: skew(-30deg); }
+    .turn .prev::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 15px;
+      background: #ccc;
+      bottom: 5px;
+      left: 5px;
+      transform-origin: 50% 0;
+      transform: skew(30deg); }
+  .turn .next {
+    margin-right: -2px;
+    left: auto;
+    right: 0; }
+    .turn .next::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 15px;
+      background: #ccc;
+      top: 5px;
+      left: 15px;
+      transform-origin: 50% 100%;
+      transform: skew(30deg); }
+    .turn .next::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 15px;
+      background: #ccc;
+      bottom: 5px;
+      left: 15px;
+      transform-origin: 50% 0;
+      transform: skew(-30deg); }
+
+.panel:hover .turn {
+  display: block; }
 
 /*# sourceMappingURL=multi-item-slider.css.map */

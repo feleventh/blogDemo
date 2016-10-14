@@ -24,6 +24,15 @@ body{
   position: relative;
   font-family: 'microsoft yahei';
 }
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  color: #027cdf;
+}
 
 // common style
 .main-wrap {
