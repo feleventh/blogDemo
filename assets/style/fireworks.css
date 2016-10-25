@@ -1,0 +1,9 @@
+.fireworks {
+  width: 4px;
+  height: 4px;
+  margin: 60px;
+  background: darkred;
+  border-radius: 2px;
+  box-shadow: 20px 0 0 -1px darkred, -20px 0 0 -1px darkred; }
+
+/*# sourceMappingURL=fireworks.css.map */
