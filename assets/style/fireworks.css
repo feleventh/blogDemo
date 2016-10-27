@@ -1,9 +1,18 @@
+/* line 2, fireworks.scss */
+.fireworks-wrap {
+  height: 300px;
+  position: relative;
+}
+
+/* line 6, fireworks.scss */
 .fireworks {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  margin-left: -2px;
   width: 4px;
   height: 4px;
-  margin: 60px;
   background: darkred;
   border-radius: 2px;
-  box-shadow: 20px 0 0 -1px darkred, -20px 0 0 -1px darkred; }
-
-/*# sourceMappingURL=fireworks.css.map */
+  box-shadow: 20px 0 0 -1px darkred, -20px 0 0 -1px darkred, 0 -20px 0 -1px darkred, 0 20px 0 -1px darkred, 14px 14px 0 -1px darkred, 14px -14px 0 -1px darkred, -14px 14px 0 -1px darkred, -14px -14px 0 -1px darkred;
+}

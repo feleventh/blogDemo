@@ -1,10 +1,36 @@
+@import "compass/utilities";
+.fireworks-wrap{
+  height: 300px;
+  position: relative;
+}
 .fireworks{
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  margin-left: -2px;
   width: 4px;
   height: 4px;
-  margin: 60px;
   background: darkred;
   border-radius: 2px;
   box-shadow: 20px 0 0 -1px darkred,
-    -20px 0 0 -1px darkred
+    -20px 0 0 -1px darkred,
+    0 -20px 0 -1px darkred,
+    0 20px 0 -1px darkred,
+    14px 14px 0 -1px darkred,
+    14px -14px 0 -1px darkred,
+    -14px 14px 0 -1px darkred,
+    -14px -14px 0 -1px darkred,
     ;
+}
+
+@mixin box-shadow($r, $i){
+  box-shadow: $r 0 0 $i darkred,
+  -$r 0 0 $i darkred,
+  0 -$r 0 $i darkred,
+  0 $r 0 $i darkred,
+  $r*sin(45deg) $r*cos(45deg) 0 $i darkred,
+  $r*sin(135deg) $r*cos(135deg) 0 $i darkred,
+  $r*sin(225deg) $r*cos(225deg) 0 $i darkred,
+  $r*sin(325deg) $r*cos(325deg) 0 $i darkred,
+;
 }
