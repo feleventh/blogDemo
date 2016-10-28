@@ -1,18 +1,49 @@
 /* line 2, fireworks.scss */
-.fireworks-wrap {
-  height: 300px;
-  position: relative;
+.main-wrap {
+  height: 1000px;
 }
 
-/* line 6, fireworks.scss */
+/* line 5, fireworks.scss */
+.fireworks-wrap {
+  height: 300px;
+  overflow: hidden;
+  position: fixed;
+  background: #0c1328;
+}
+
+/* line 11, fireworks.scss */
 .fireworks {
   position: absolute;
-  bottom: 100px;
+  bottom: 0;
   left: 50%;
   margin-left: -2px;
-  width: 4px;
-  height: 4px;
+  width: 8px;
+  height: 8px;
   background: darkred;
-  border-radius: 2px;
-  box-shadow: 20px 0 0 -1px darkred, -20px 0 0 -1px darkred, 0 -20px 0 -1px darkred, 0 20px 0 -1px darkred, 14px 14px 0 -1px darkred, 14px -14px 0 -1px darkred, -14px 14px 0 -1px darkred, -14px -14px 0 -1px darkred;
+  border-radius: 4px;
+  animation: boom 4s ease 2s infinite;
+}
+
+@keyframes boom {
+  0% {
+    bottom: 0;
+    box-shadow: none;
+  }
+  30% {
+    bottom: 85%;
+    box-shadow: none;
+    background: darkred;
+  }
+  31% {
+    bottom: 85%;
+    background: #0c1328;
+    box-shadow: 1px 0 0 -2px #fff032, -1px 0 0 -2px #ff923b, 0 -1px 0 -2px #ff7b9e, 0 1px 0 -2px #ff17a0, 0.5px 0.86603px 0 -2px #ffecfb, 0.86603px 0.5px 0 -2px #fffd87, 0.86603px -0.5px 0 -2px #ffd480, 0.5px -0.86603px 0 -2px #ff4f82, -0.5px -0.86603px 0 -2px #fff98d, -0.86603px -0.5px 0 -2px #ffef48, -0.86603px 0.5px 0 -2px #ff5ffb, -0.5px 0.86603px 0 -2px #ffd25c;
+    transform: none;
+  }
+  100% {
+    bottom: 83%;
+    background: #0c1328;
+    box-shadow: 120px 0 0 -2px #ff0ecd, -120px 0 0 -2px #ff143a, 0 -120px 0 -2px #ffc766, 0 120px 0 -2px #ffa4b6, 60px 103.92305px 0 -2px #ff1868, 103.92305px 60px 0 -2px #ffb1c4, 103.92305px -60px 0 -2px #ffaaff, 60px -103.92305px 0 -2px #ff9150, -60px -103.92305px 0 -2px #ff9d2b, -103.92305px -60px 0 -2px #ffa022, -103.92305px 60px 0 -2px #ff4160, -60px 103.92305px 0 -2px #ff7bef;
+    transform: rotate(5deg) scale(1, 1);
+  }
 }

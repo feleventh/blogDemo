@@ -1,36 +1,64 @@
 @import "compass/utilities";
+.main-wrap{
+  height: 1000px;
+}
 .fireworks-wrap{
   height: 300px;
-  position: relative;
+  overflow: hidden;
+  position: fixed;
+  background: #0c1328;
 }
 .fireworks{
   position: absolute;
-  bottom: 100px;
+  bottom: 0;
   left: 50%;
   margin-left: -2px;
-  width: 4px;
-  height: 4px;
+  width: 8px;
+  height: 8px;
   background: darkred;
-  border-radius: 2px;
-  box-shadow: 20px 0 0 -1px darkred,
-    -20px 0 0 -1px darkred,
-    0 -20px 0 -1px darkred,
-    0 20px 0 -1px darkred,
-    14px 14px 0 -1px darkred,
-    14px -14px 0 -1px darkred,
-    -14px 14px 0 -1px darkred,
-    -14px -14px 0 -1px darkred,
-    ;
+  border-radius: 4px;
+  animation: boom 4s ease 2s infinite;
 }
 
+
+
 @mixin box-shadow($r, $i){
-  box-shadow: $r 0 0 $i darkred,
-  -$r 0 0 $i darkred,
-  0 -$r 0 $i darkred,
-  0 $r 0 $i darkred,
-  $r*sin(45deg) $r*cos(45deg) 0 $i darkred,
-  $r*sin(135deg) $r*cos(135deg) 0 $i darkred,
-  $r*sin(225deg) $r*cos(225deg) 0 $i darkred,
-  $r*sin(325deg) $r*cos(325deg) 0 $i darkred,
+  box-shadow: $r 0 0 $i rgb(255,random(255),random(255)),
+  -1*$r 0 0 $i rgb(255,random(255),random(255)),
+  0 -1*$r 0 $i rgb(255,random(255),random(255)),
+  0 $r 0 $i rgb(255,random(255),random(255)),
+  $r*sin(30deg) $r*cos(30deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(60deg) $r*cos(60deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(120deg) $r*cos(120deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(150deg) $r*cos(150deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(210deg) $r*cos(210deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(240deg) $r*cos(240deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(300deg) $r*cos(300deg) 0 $i rgb(255,random(255),random(255)),
+  $r*sin(330deg) $r*cos(330deg) 0 $i rgb(255,random(255),random(255)),
 ;
+}
+
+@keyframes boom {
+  0%{
+    bottom: 0;
+    box-shadow: none;
+  }
+  30%{
+    bottom: 85%;
+    box-shadow: none;
+    background: darkred;
+  }
+  31%{
+    bottom: 85%;
+    background: #0c1328;
+    @include box-shadow(1px, -2px);
+    transform: none;
+  }
+
+  100%{
+    bottom: 83%;
+    background: #0c1328;
+    @include box-shadow(120px, -2px);
+    transform:rotate(5deg) scale(0.9+0.1*random(2),1);
+  }
 }

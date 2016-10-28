@@ -13,10 +13,42 @@
   <div class="card">
     <div class="card-header">fireworks</div>
     <div class="card-content fireworks-wrap">
-      <div class="fireworks">
-      </div>
+      <div class="fireworks firework-0"></div>
+      <div class="firework-1"></div>
+      <div class="firework-2"></div>
+      <div class="firework-3"></div>
+      <div class="firework-4"></div>
     </div>
   </div>
 </div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+  $('.fireworks-wrap').css({
+    top: 0,
+    left: 0,
+    height: document.body.clientHeight,
+    width: document.body.clientWidth
+  });
+  setTimeout(function () {
+    $('.firework-1')
+            .css({left: '10%'})
+            .addClass('fireworks');
+  },1000);
+  setTimeout(function () {
+    $('.firework-2')
+            .css({left: '30%'})
+            .addClass('fireworks');
+  },3500);
+  setTimeout(function () {
+    $('.firework-3')
+            .css({left: '72%'})
+            .addClass('fireworks');
+  },2500);
+  setTimeout(function () {
+    $('.firework-4')
+            .css({left: '88%'})
+            .addClass('fireworks');
+  },2000);
+</script>
 </body>
 </html>
