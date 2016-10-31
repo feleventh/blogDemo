@@ -52,7 +52,7 @@ input[type="range"].alpha {
 input[type="date"]{
   outline: none;
   -webkit-appearance: none;
-  &::-webkit-datetime-edit { padding: 1px; background: url(/study/image/selection.gif); }
+  &::-webkit-datetime-edit {  background: #1E88C7; }
   &::-webkit-datetime-edit-fields-wrapper { background-color: #eee; }
   &::-webkit-datetime-edit-text { color: #4D90FE; padding: 0 .3em; }
   &::-webkit-datetime-edit-year-field { color: purple; }
@@ -73,11 +73,11 @@ input[type="color"] {
   height: 40px;
   border: 0;
   padding: 0;
-  border-radius: 20px;
+  border-radius: 40px;
   outline: none;
   -webkit-appearance: none;
   &::-webkit-color-swatch-wrapper {
-    border-radius: 20px;
+    border-radius: 40px;
     background: radial-gradient(red, magenta, blue, cyan, lime, yellow, red);
   }
   &::-webkit-color-swatch {
@@ -112,5 +112,78 @@ input[type="color"] {
   svg{
     vertical-align: middle;
   }
+  &+span{
+    vertical-align: top;
+    line-height: 30px;
+    margin-left: 5px;
+  }
 }
-
+.checkbox{
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  input[type="checkbox"]{
+    visibility: hidden;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+  .check{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .checked{
+    position: absolute;
+    top: -20px;
+    left: 0;
+    transition: top .3s;
+  }
+  &.active .checked {
+    top: 0;
+    transition: top .3s;
+  }
+}
+label{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  input[type="radio"]{
+    opacity: 0;
+  }
+  &::before{
+    display: block;
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    border: 2px solid #1E88C7;
+  }
+  &::after{
+    display: block;
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: #1E88C7;
+    transition: top .3s;
+  }
+}
+label.radio-checked{
+  &::after{
+    top: 9px;
+    transition: top .3s;
+  }
+}

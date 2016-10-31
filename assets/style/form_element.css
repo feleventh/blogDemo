@@ -61,8 +61,7 @@ input[type="date"] {
 }
 /* line 55, form_element.scss */
 input[type="date"]::-webkit-datetime-edit {
-  padding: 1px;
-  background: url(/study/image/selection.gif);
+  background: #1E88C7;
 }
 /* line 56, form_element.scss */
 input[type="date"]::-webkit-datetime-edit-fields-wrapper {
@@ -105,13 +104,13 @@ input[type="color"] {
   height: 40px;
   border: 0;
   padding: 0;
-  border-radius: 20px;
+  border-radius: 40px;
   outline: none;
   -webkit-appearance: none;
 }
 /* line 79, form_element.scss */
 input[type="color"]::-webkit-color-swatch-wrapper {
-  border-radius: 20px;
+  border-radius: 40px;
   background: radial-gradient(#ff0000, #ff00ff, #0000ff, #00ffff, #00ff00, #ffff00, #ff0000);
 }
 /* line 83, form_element.scss */
@@ -151,4 +150,90 @@ input[type="color"]::-webkit-color-swatch {
 /* line 112, form_element.scss */
 .file svg {
   vertical-align: middle;
+}
+/* line 115, form_element.scss */
+.file + span {
+  vertical-align: top;
+  line-height: 30px;
+  margin-left: 5px;
+}
+
+/* line 121, form_element.scss */
+.checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+/* line 127, form_element.scss */
+.checkbox input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+/* line 136, form_element.scss */
+.checkbox .check {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 141, form_element.scss */
+.checkbox .checked {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  transition: top .3s;
+}
+/* line 147, form_element.scss */
+.checkbox.active .checked {
+  top: 0;
+  transition: top .3s;
+}
+
+/* line 152, form_element.scss */
+label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+/* line 157, form_element.scss */
+label input[type="radio"] {
+  opacity: 0;
+}
+/* line 160, form_element.scss */
+label::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  border: 2px solid #1E88C7;
+}
+/* line 171, form_element.scss */
+label::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: #1E88C7;
+  transition: top .3s;
+}
+
+/* line 185, form_element.scss */
+label.radio-checked::after {
+  top: 9px;
+  transition: top .3s;
 }
