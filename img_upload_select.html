@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>image upload</title>
+	<link rel="stylesheet" href="assets/style/base.css">
+	<link rel="stylesheet" href="assets/style/img_upload_select.css">
+	<link rel="stylesheet" href="assets/js/imgareaselect/imgareaselect-default.css">
+</head>
+<body>
+<div class="main-wrap">
+	<div class="header">form validate</div>
+	<div class="card">
+		<div class="card-header">上传图片</div>
+		<div class="card-content">
+			<p>
+				<button>上传图片</button>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="modal upload-img">
+	<div class="modal-close">+</div>
+	<div class="modal-header">上传图片</div>
+	<div class="modal-body">
+		<div class="up-load">
+			<a href="javascript:;" class="file">选择文件
+				<input type="file">
+				<svg width="20px" height="20px" viewBox="0 0 1024 1024">
+					<path fill="#1E88C7" d="M82.2272 382.473309l14.6432 0L96.8704 136.229236c0-19.781818 16.477091-35.802764 35.923782-35.802764l1.145018 0 239.141236 0c10.966109 0 21.047855 5.157236 27.675927 12.939636L527.080727 247.919709l363.641018 0c19.6608 0 35.691055 16.235055 35.691055 36.0448l0 1.033309 0 97.4848 15.090036 0c19.688727 0 35.9424 16.030255 35.9424 35.597964 0 2.504145-0.465455 4.338036-0.912291 6.0416l-50.362182 467.428073c-1.591855 18.301673-17.389382 32.032582-35.458327 32.032582L132.794182 923.582836c-19.009164 0-35.011491-14.996945-35.923782-34.331927L46.740945 422.074182c-2.066618-19.241891 12.111127-37.301527 31.799855-39.042327l3.677091 0L82.217891 382.473309 82.2272 382.473309zM168.485236 382.473309 168.485236 382.473309l686.768873 0L855.254109 319.767273 511.525236 319.767273c-9.392873 0-18.767127-3.770182-25.637236-11.431564l-128.372364-136.266473L168.485236 172.069236 168.485236 382.473309 168.485236 382.473309zM901.697164 454.106764 901.697164 454.106764l-10.053818 0-0.912291 0-0.940218 0L132.794182 454.106764l-0.707491 0-9.811782 0 42.551855 398.066036 694.076509 0L901.697164 454.106764 901.697164 454.106764z"  />
+				</svg>
+		  </a>
+			<span>未选择任何文件</span>
+		</div>
+		<div class="img-select hide">
+			<div class="left"><img class="" id="select-img" src="" alt=""></div>
+			<div class="right">
+				<h3>预览</h3>
+				<div class="preview1"><div class="img-box"><img src="" alt="" width="" height=""></div><p>80*80</p></div>
+				<div class="preview2"><div class="img-box"><img src="" alt="" width="" height=""></div><p>175*175</p></div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="btn-wrap">
+			<a href="javascript:;" class="btn-cancel">取消</a>
+			<a href="javascript:;" class="btn-save hide">保存</a>
+		</div>
+	</div>
+</div>
+<div class="mask hide"></div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="assets/js/imgareaselect/jquery.imgareaselect.min.js"></script>
+<script>
+	var select = {
+		x1: 0,
+		x2: 0,
+		y1: 0,
+		y2: 0,
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+		src_width: 0,
+		src_height: 0,
+	}
+	//preview方法 img图片参数，selection选区参数
+	function preview(img, selection) {
+
+		//重新设置x、y、w、h的值
+		select.x=selection.x1;
+		select.y=selection.y1;
+		select.x1=selection.x1;
+		select.y1=selection.y1;
+		select.x2=selection.x2;
+		select.y2=selection.y2;
+		select.w = selection.x2 - selection.x1;
+		select.h = selection.y2 - selection.y1;
+		preview_photo($('.preview1 .img-box'), selection);
+		preview_photo($('.preview2 .img-box'), selection);
+	}
+
+	//preview_photo()方法 左一的图片调整（与选区的图片显示一致）
+	//div_class是对应div的class
+	function preview_photo(dom, selection) {
+
+		//获取div的宽度与高度
+		var width = dom.outerWidth();
+		var height = dom.outerHeight();
+		var scaleX = width / selection.width;
+		var scaleY = height / selection.height;
+		var src_width = select.src_width;
+		var src_height = select.src_height;
+		dom.find('img').css({
+			width: Math.round(scaleX * parseInt(src_width)) + 'px',
+			height: Math.round(scaleY * parseInt(src_height)) + 'px',
+			marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+			marginTop: '-' + Math.round(scaleY * selection.y1) + 'px',
+			top: 0,
+			transform: 'none',
+		});
+	}
+	function getUploadUrl(node){
+		'use strict';
+		var imgURL = "";
+		try{
+			var file = null;
+			if(node.files && node.files[0] ){
+				file = node.files[0];
+			}else if(node.files && node.files.item(0)) {
+				file = node.files.item(0);
+			}
+			//Firefox 因安全性问题已无法直接通过input[file].value 获取完整的文件路径
+			try{
+				//Firefox7.0
+				imgURL =  file.getAsDataURL();
+				//alert("//Firefox7.0"+imgRUL);
+			}catch(e){
+				//Firefox8.0以上
+				imgURL = window.URL.createObjectURL(file);
+				//alert("//Firefox8.0以上"+imgRUL);
+			}
+		}catch(e){      //这里不知道怎么处理了，如果是遨游的话会报这个异常
+			//支持html5的浏览器,比如高版本的firefox、chrome、ie10
+			if (node.files && node.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					imgURL = e.target.result;
+				};
+				reader.readAsDataURL(node.files[0]);
+			}
+		}
+		return imgURL;
+	}
+$().ready(function(){
+	//upload click
+	$('.up-load .file input').change(function (event) {
+		var fakeSrc = $.trim($(this).val()).toLowerCase();
+		var type = fakeSrc.substr(fakeSrc.indexOf('.',-5)+1).replace('.','');
+		console.log(type);
+		if(!(type==='jpg'||type==='jpeg')){
+			$(this).val('');
+			return alert({content:'图片格式必须为jpg或jpeg！'});
+		}
+		console.log(event.target.files[0].size);
+		if(event.target.files[0].size>2*1024*1024){
+			return alert({content:'图片大小不得超过2M！'});
+		}
+		var imgSrc = getUploadUrl($(this)[0]);
+		//verification
+		$(this).parents('.upload').addClass('hide');
+		$('.img-select').removeClass('hide');
+		$('.btn-save').removeClass('hide');
+		$('.img-select .left img').addClass('loaded-img').attr('src',imgSrc);
+		$('.preview1 img').css('display','block').attr('src',imgSrc);
+		$('.preview2 img').css('display','block').attr('src',imgSrc);
+		$('#select-img').ready(function(){
+			var wrap_height = $(this).parent().height();
+			var src_width = $('#select-img').width();
+			var src_height = $('#select-img').height();
+			console.log('width:'+src_width+' '+'height'+src_height);
+			if(src_width>476){
+				$('#select-img').css({width: '476px', height: 476/src_width*src_height+'px'});
+			}
+			if(src_height>wrap_height){
+				$(this).css({
+					height: '100%',
+					width:'auto',
+					left: '50%',
+					top: 0,
+					transform: 'translateX(-50%)',
+				});
+			}
+			select.src_width = src_width;
+			select.src_height = src_height;
+			console.log(select.src_width+" "+select.src_height);
+			imgAreaSelectApi = $('#select-img').imgAreaSelect({
+				fadeSpeed: 200,
+				imageHeight: src_height,
+				imageWidth: src_width,
+				minHeight: 104,
+				minWidth: 104,
+				//persistent : true,  // true，选区以外点击不会启用一个新选区（只能移动/调整现有选区）
+				instance: true, //true，返回一个imgAreaSelect绑定到的图像的实例，可以使用api方法
+				onSelectChange: preview,
+				x1: 0,
+				y1: 0,
+				x2: src_width<src_height ? src_width : src_height,
+				y2: src_width<src_height ? src_width : src_height, // 改变选区时的回调函数
+				show: true, // 选区会显示
+				handles: true, // true，调整手柄则会显示在选择区域内
+				resizable: true, // true， 选区面积可调整大小
+				aspectRatio: '1:1' // 选区的显示比率 400:300*/
+			});
+
+			imgAreaSelectApi.setSelection(0, 0 , 175, 175);
+			imgAreaSelectApi.update();
+		});
+	});
+});
+</script>
+</body>
+</html>

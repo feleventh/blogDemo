@@ -1,0 +1,88 @@
+.file {
+  position: relative;
+  display: inline-block;
+  background: #D0EEFF;
+  border: 1px solid #99D3F5;
+  border-radius: 4px;
+  padding: 0 12px;
+  overflow: hidden;
+  color: #1E88C7;
+  text-decoration: none;
+  text-indent: 0;
+  line-height: 28px; }
+  .file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none; }
+  .file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0; }
+  .file svg {
+    vertical-align: middle; }
+  .file + span {
+    vertical-align: top;
+    line-height: 30px;
+    margin-left: 5px; }
+
+.modal.upload-img .modal-body {
+  height: 332px;
+  border: 1px dashed #ccc; }
+  .modal.upload-img .modal-body .img-select .left {
+    width: 450px;
+    height: 332px;
+    float: left;
+    background: whitesmoke; }
+    .modal.upload-img .modal-body .img-select .left img {
+      display: none; }
+      .modal.upload-img .modal-body .img-select .left img.loaded-img {
+        display: block;
+        position: relative;
+        top: 50%;
+        width: 100%;
+        transform: translateY(-50%); }
+  .modal.upload-img .modal-body .img-select .right {
+    width: 177px;
+    padding: 0 0 0 15px;
+    border-left: 1px solid #e6e6e6;
+    height: 332px;
+    float: right; }
+    .modal.upload-img .modal-body .img-select .right h3 {
+      font-size: 14px;
+      line-height: 24px;
+      margin: 0; }
+    .modal.upload-img .modal-body .img-select .right .preview1 {
+      width: 82px; }
+      .modal.upload-img .modal-body .img-select .right .preview1 .img-box {
+        width: 80px;
+        height: 80px; }
+    .modal.upload-img .modal-body .img-select .right .preview2 {
+      width: 177px; }
+      .modal.upload-img .modal-body .img-select .right .preview2 .img-box {
+        width: 175px;
+        height: 175px; }
+    .modal.upload-img .modal-body .img-select .right .img-box {
+      background: whitesmoke;
+      overflow: hidden;
+      border: 1px solid #e6e6e6; }
+      .modal.upload-img .modal-body .img-select .right .img-box img {
+        position: relative;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        display: none; }
+    .modal.upload-img .modal-body .img-select .right p {
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      font-size: 14px;
+      background: whitesmoke; }
+  .modal.upload-img .modal-body .img-select::after {
+    content: '';
+    display: block;
+    clear: both; }
+
+/*# sourceMappingURL=img_upload_select.css.map */

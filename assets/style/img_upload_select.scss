@@ -1,0 +1,108 @@
+.file {
+  position: relative;
+  display: inline-block;
+  background: #D0EEFF;
+  border: 1px solid #99D3F5;
+  border-radius: 4px;
+  padding: 0 12px;
+  overflow: hidden;
+  color: #1E88C7;
+  text-decoration: none;
+  text-indent: 0;
+  line-height: 28px;
+  &:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+  }
+  input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+  }
+  svg{
+    vertical-align: middle;
+  }
+  &+span{
+    vertical-align: top;
+    line-height: 30px;
+    margin-left: 5px;
+  }
+}
+.modal.upload-img{
+  .modal-body{
+    height: 332px;
+    border: 1px dashed #ccc;
+    .img-select{
+      .left{
+        width: 450px;
+        height: 332px;
+        float: left;
+        background: rgb(245,245,245);
+        img{
+          display: none;
+          &.loaded-img{
+            display: block;
+            position: relative;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+      .right{
+        width: 177px;
+        padding: 0 0 0 15px;
+        border-left: 1px solid #e6e6e6;
+        height: 332px;
+        float: right;
+        h3{
+          font-size: 14px;
+          line-height: 24px;
+          margin: 0;
+        }
+        .preview1{
+          width: 82px;
+          .img-box{
+            width: 80px;
+            height: 80px;
+          }
+        }
+        .preview2{
+          width: 177px;
+          .img-box{
+            width: 175px;
+            height: 175px;
+          }
+        }
+        .img-box{
+          background: rgb(245,245,245);
+          overflow: hidden;
+          border: 1px solid #e6e6e6;
+          img{
+            position: relative;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+          }
+        }
+        p{
+          height: 24px;
+          text-align: center;
+          line-height: 24px;
+          font-size: 14px;
+          background: rgb(245,245,245);
+        }
+      }
+      &::after{
+        content: '';
+        display: block;
+        clear: both;
+      }
+    }
+  }
+}
