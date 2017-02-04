@@ -20,7 +20,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal upload-img">
+<div class="modal upload-img hide">
 	<div class="modal-close">+</div>
 	<div class="modal-header">上传图片</div>
 	<div class="modal-body">
@@ -50,7 +50,7 @@
 	</div>
 </div>
 <div class="mask hide"></div>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="assets/js/imgareaselect/jquery.imgareaselect.min.js"></script>
 <script>
 	var select = {
@@ -134,6 +134,10 @@
 		return imgURL;
 	}
 $().ready(function(){
+	$('.card-content button').click(function(){
+		$('.modal.upload-img').removeClass('hide');
+	});
+
 	//upload click
 	$('.up-load .file input').change(function (event) {
 		var fakeSrc = $.trim($(this).val()).toLowerCase();

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no" name="viewport">
+	<title>Title</title>
+	<link rel="stylesheet" href="node_modules/fullpage.js/dist/jquery.fullpage.css">
+</head>
+<body>
+<div id="fullpage">
+	<div class="section s1">
+	<img src="img/bc8.jpg" alt="">
+	</div>
+	<div class="section s2">
+	<img src="img/bc8.jpg" alt="">
+	 </div>
+	<div class="section s3">
+	<img src="img/bc8.jpg" alt="">
+	</div>
+	<div class="section s4">
+	 <img src="img/bc8.jpg" alt="">
+	 </div>
+	<div class="section s5">
+	<img src="img/bc8.jpg" alt="">
+ </div>
+	<ul id="myMenu">
+		<li data-menuanchor="firstPage" class="active"><a href="#firstPage">First section</a></li>
+		<li data-menuanchor="secondPage"><a href="#secondPage">Second section</a></li>
+		<li data-menuanchor="thirdPage"><a href="#thirdPage">Third section</a></li>
+		<li data-menuanchor="fourthPage"><a href="#fourthPage">Fourth section</a></li>
+		<li data-menuanchor="lastPage"><a href="#lastPage">Fourth section</a></li>
+	</ul>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="node_modules/fullpage.js/vendors/jquery.easings.min.js"></script>
+<script src="node_modules/fullpage.js/dist/jquery.fullpage.min.js"></script>
+<script>
+	$().ready(function(){
+		$('#fullpage').fullpage({
+			navigation: true,
+			anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'lastPage'],
+			menu: '#myMenu'
+		})
+	})
+</script>
+</body>
+</html>
