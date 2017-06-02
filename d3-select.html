@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>D3js入门</title>
+    <link rel="stylesheet" href="assets/style/base.css">
+</head>
+<body>
+    <div class="main-wrap">
+        <div class="header">使用D3js</div>
+        <div class="card d3-start">
+            <div class="card-header">D3js入门</div>
+            <div class="card-content"></div>
+        </div>
+      <div class="card d3-chart">
+        <div class="card-header">D3js制作饼图</div>
+        <div class="card-content"></div>
+      </div>
+      <div class="card d3-axis">
+        <div class="card-header">D3js坐标轴</div>
+        <div class="card-content"></div>
+      </div>
+    </div>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        function D3Widget (options) {
+            var instance = {}
+            var headline, description
+
+            instance.render = function () {
+                var div = d3.select('.d3-start .card-content').append('div');
+                div.append('h3').text(headline)
+                div.attr('class', 'box')
+                  .attr('style','color: ' + options.color)
+                  .append('p')
+                  .text(description)
+                var svg = div.append('svg')
+                  .attr('width','100%')
+                  .attr('height','200')
+                var g = svg.append('g')
+                g.append('path')
+                  .attr('d', 'M10 10 L100 50 L100 200 L20 200Z')
+                  .attr('stroke', 'red')
+                  .attr('stoke-width', 2)
+                  .attr('fill', 'rgb(120,47,231)')
+                g.append('text')
+                  .attr('x', 50)
+                  .attr('y', 50)
+                  .text('simple demo')
+                  .attr('transform', 'rotate(30)')
+                return instance
+            }
+
+            instance.headline = function (h) {
+                if (!arguments.length) return headline
+                headline = h
+                return instance
+            }
+
+            instance.description = function (d) {
+                if (!arguments.length) return description
+                description = d
+                return instance
+            }
+            return instance
+        }
+
+        var d3Widget = D3Widget({color: '#6495ed'})
+          .headline('Simple demo')
+          .description('this is a simple demo about d3.js and svg')
+        d3Widget.render()
+
+      var width = 400, height = 400, endAngle = 2*Math.PI,
+          colors = d3.scaleOrdinal(d3.schemeCategory20c)
+      var svgChart = d3.select('.d3-chart .card-content').append('svg')
+        .attr('class', 'pie')
+        .attr('height', height)
+        .attr('width', width)
+      function render (innerRadius) {
+        var data = [
+          {startAngle: 0, endAngle: 0.1*endAngle},
+          {startAngle: 0.1*endAngle, endAngle: 0.2*endAngle},
+          {startAngle: 0.2*endAngle, endAngle: 0.4*endAngle},
+          {startAngle: 0.4*endAngle, endAngle: 0.6*endAngle},
+          {startAngle: 0.6*endAngle, endAngle: 0.7*endAngle},
+          {startAngle: 0.7*endAngle, endAngle: 0.9*endAngle},
+          {startAngle: 0.9*endAngle, endAngle: endAngle}
+        ]
+        var arc = d3.arc().outerRadius(200).innerRadius(innerRadius)
+        svgChart.select('g').remove()
+        svgChart.append('g')
+          .attr('transform', 'translate(200, 200)')
+          .selectAll('path.arc')
+          .data(data)
+          .enter()
+          .append('path')
+            .attr('class','arc')
+            .attr('fill', function(d, i){
+            	return colors(i)
+            })
+            .transition().duration(1000)
+            .attrTween('d', function(d){
+            	var start = {startAngle: 0, endAngle: 0}
+            	var interpolate = d3.interpolate(start, d)
+              return function (t) {
+                return arc(interpolate(t))
+              }
+            })
+      }
+
+      render(100)
+
+      var axisSvg = d3.select('.d3-axis .card-content').append('svg')
+        .attr('height', height)
+        .attr('width', width)
+      var dataset = [2.3, 3.5, 1,4, 0.8, 2.8]
+      var linear = d3.scaleLinear()
+        .domain([0, d3.max(dataset)])
+        .range([0, 250])
+      var rectHeight = 25
+      axisSvg.selectAll('rect')
+        .data(dataset)
+        .enter()
+        .append('rect')
+        .attr('x',20)
+        .attr('y', function(d, i){
+          return i*rectHeight
+        })
+        .attr('width', function(d){
+          return linear(d)
+        })
+        .attr('height', rectHeight-2)
+        .attr('fill', 'steelblue')
+      var axis = d3.axisBottom()
+        .scale(linear)
+        .ticks(7)
+      axisSvg.append('g')
+        .attr('class','axis')
+        .attr('transform','translate(20,150)')
+        .call(axis)
+    </script>
+</body>
+</html>
