@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>D3js入门-力导向图</title>
+    <link rel="stylesheet" href="assets/style/base.css">
+</head>
+<body>
+    <div class="main-wrap">
+        <div class="header">使用D3js制作力导向图</div>
+        <div class="card d3-start">
+            <div class="card-header">D3js入门</div>
+            <div class="card-content"></div>
+        </div>
+    </div>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+      var nodes = [{name: '桂林'}, {name: '广州'}, {name: '厦门'}, {name: '杭州'}, {name: '上海'},
+        {name: '青岛'}, {name: '天津'}, ]
+      var links = [{source: 0, target: 1}, {source: 0, target: 2}, {source: 0, target: 3},
+        {source: 1, target: 4}, {source: 1, target: 5}, {source: 1, target: 6}]
+      var width = 400;    //画布的宽度
+      var height = 400;    //画布的高度
+      var simulation = d3.forceSimulation(nodes)
+        .force('link', d3.forceLink(links).distance(20).strength(1).iterations(10))
+        .force('x', d3.forceX())
+        .force('y', d3.forceY())
+        .force('charge', d3.forceManyBody().strength(-200))
+      var svg = d3.select('.card-content')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+      var g = svg.append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+      var loading = svg.append('text')
+        .attr('dy', '0.35em')
+        .attr('text-anchor', 'middle')
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', 10)
+        .text('Simulating. One moment please…')
+      d3.timeout(function() {
+        loading.remove();
+
+        // See https://github.com/d3/d3-force/blob/master/README.md#simulation_tick
+        for (var i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
+          simulation.tick();
+        }
+
+        g.append('g')
+          .attr('stroke', '#000')
+          .attr('stroke-width', 1.5)
+          .selectAll('line')
+          .data(links)
+          .enter().append('line')
+          .attr('x1', function(d) { return d.source.x; })
+          .attr('y1', function(d) { return d.source.y; })
+          .attr('x2', function(d) { return d.target.x; })
+          .attr('y2', function(d) { return d.target.y; });
+
+        g.append('g')
+          .attr('stroke', '#fff')
+          .attr('stroke-width', 1.5)
+          .selectAll('circle')
+          .data(nodes)
+          .enter().append('circle')
+          .attr('cx', function(d) { return d.x; })
+          .attr('cy', function(d) { return d.y; })
+          .attr('r', 4.5)
+      })
+    </script>
+</body>
+</html>

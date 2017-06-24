@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>D3js入门-柱状图</title>
+    <link rel="stylesheet" href="assets/style/base.css">
+  <style>
+    .axis path,
+    .axis line{
+      fill: none;
+      stroke: black;
+      shape-rendering: crispEdges;
+    }
+
+    .axis text {
+      font-family: sans-serif;
+      font-size: 11px;
+    }
+
+    .MyRect {
+      /*fill: steelblue;*/
+    }
+
+    .MyText {
+      fill: white;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+<body>
+    <div class="main-wrap">
+        <div class="header">使用D3js制作完整柱形图</div>
+        <div class="card d3-start">
+            <div class="card-header">D3js入门</div>
+            <div class="card-content"></div>
+        </div>
+    </div>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+      var width = 400;    //画布的宽度
+      var height = 400;    //画布的高度
+      var svg = d3.select('.card-content')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+      var padding = {left: 30, right: 30, top: 20, bottom: 20}
+      var dataset = [10, 20, 30, 40, 33, 24, 12, 5]
+      var xScale = d3.scaleBand()  // 定义比例尺   柱状图x轴用scaleBand
+        .domain(d3.range(dataset.length))
+        .rangeRound([0, width - padding.left - padding.right])
+      var yScale = d3.scaleLinear()
+        .domain([0, d3.max(dataset)]) // 定义域
+        .range([height - padding.top - padding.bottom, 0]) //值域
+
+      var xAxis = d3.axisBottom()  // 定义坐标轴
+        .scale(xScale)
+      var yAxis = d3.axisLeft()
+        .scale(yScale)
+      var rectPadding = 4
+
+      var rects = svg.selectAll('MyRect') // 添加矩形
+        .data(dataset)
+        .enter()
+        .append('rect')
+        .attr('class', 'MyRect')
+        .attr('transform', 'translate(' + padding.left + ',' + padding.top +')')
+        .attr('x', function (d, i) {
+        	return xScale(i) + rectPadding / 2
+        })
+        .attr('width', xScale.bandwidth() - rectPadding)
+        .attr('y', function (d) {
+          var min = yScale.domain()[0];
+          return yScale(min)
+        })
+        .attr('height', function (d) {
+          return 0
+        })
+        .transition()   // 设置过渡动画
+        .delay(function (d, i) {
+          return i * 200
+        })
+        .duration(2000)
+        .ease(d3.easeBounce)
+        .attr('y', function (d) {
+          return yScale(d)
+        })
+        .attr('height', function (d) {
+          console.log(yScale(d))
+          return height - padding.top - padding.bottom - yScale(d)
+        })
+      var rect = svg.selectAll('.MyRect')
+        .attr('fill', 'steelblue')
+        .on('mouseover', function (d, i) {
+          d3.select(this)
+            .attr('fill', 'green')
+        })
+        .on('mouseout', function (d, i) {
+          d3.select(this)
+            .attr('fill', 'steelblue')
+        })
+      var text = svg.selectAll('.dMyText')
+        .data(dataset)
+        .enter()
+        .append('text')
+        .attr('class', 'MyText')
+        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')')
+        .attr('x', function (d, i) {
+          return xScale(i) + rectPadding / 2
+        })
+        .attr('y', function (d) {
+          return yScale(d)
+        })
+        .attr('dx', function () {
+          return (xScale.bandwidth() - rectPadding) / 2
+        })
+        .attr('dy', function () {
+          return 20
+        })
+        .text(function (d) {
+          return d
+        })
+      svg.append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(' + padding.left + ',' + (height - padding.bottom) + ')')
+        .call(xAxis)
+      svg.append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')')
+        .call(yAxis)
+    </script>
+</body>
+</html>
